@@ -31,8 +31,16 @@ Após a execução do laboratório, o aluno será capaz de:
 
 ## 🛠️ Execução do Laboratório
 
-### 1) Criação do Cluster Aurora
-![Dashboard RDS](foto5.jpeg)
+### 1) Conexão ao EC2 Command Host
+![Conexão EC2](images/foto1.jpeg)
+
+**Acesso via Session Manager:**
+- Instância: Command Host
+- Método: AWS Systems Manager Session Manager
+- Sistema: Amazon Linux 2
+
+### 2) Criação do Cluster Aurora
+![Dashboard RDS](images/foto5.jpeg)
 
 **Configuração do cluster:**
 ```bash
@@ -56,23 +64,41 @@ Database Name: world
 - ✅ Atualização automática de versões menores
 - 🔒 Acesso público: Não
 
----
+### 3) Verificação do Ambiente de Banco de Dados
+![Show Databases](images/foto4.jpeg)
 
-### 2) Conexão ao EC2 Command Host
-**Instalação do cliente MariaDB:**
+**Listagem dos bancos disponíveis:**
+```sql
+SHOW DATABASES;
+```
+**Resultado:**
+```
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| world              |
++--------------------+
+5 rows in set (0.01 sec)
+```
+
+### 4) Instalação do Cliente MariaDB
+![Instalação MariaDB](images/foto6.jpeg)
+
+**Comando de instalação:**
 ```bash
 sudo yum install mariadb -y
 ```
-![Instalação MariaDB](foto6.jpeg)
 
 **Status da instalação:**
 - Pacote: mariadb-5.5.68-1.amzn2.0.1.x86_64
 - Tamanho: 8.8 MB download, 49 MB instalado
 - Transação concluída com sucesso
 
----
-
-### 3) Conexão ao Aurora Cluster
+### 5) Conexão ao Aurora Cluster
 **Endpoint do cluster:**
 ```
 aurora-instance-1.ch1mh3b4bf6.us-west-2.rds.amazonaws.com:3306
@@ -88,9 +114,7 @@ mysql -u admin --password='admin123' -h <endpoint_aurora>
 - Server version: 8.0.28 Source distribution
 - Prompt: MySQL [(none)]>
 
----
-
-### 4) Operações no Banco de Dados
+### 6) Operações no Banco de Dados
 
 #### 📊 Estrutura do Schema
 ```sql
@@ -102,7 +126,7 @@ USE world;
 ```
 
 #### 🏗️ Criação da Tabela Country
-![Criação da Tabela](foto3.jpeg)
+![Criação da Tabela e Inserts](images/foto3.jpeg)
 
 **Schema da tabela:**
 ```sql
@@ -128,6 +152,8 @@ CREATE TABLE `country` (
 - **Primary Key:** Code (CHAR(3))
 
 #### 📝 Inserção de Dados
+![Operações INSERT](images/foto2.jpeg)
+
 **Países inseridos:**
 ```sql
 -- Gabon
@@ -224,5 +250,3 @@ SELECT * FROM country WHERE GNP > 35000 and Population > 10000000;
 - [Best Practices for Aurora](https://docs.aws.amazon.com/aurora/latest/userguide/best-practices.html)
 
 *© 2025 Amazon Web Services, Inc. and its affiliates. All rights reserved.*
-
----

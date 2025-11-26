@@ -32,7 +32,6 @@ Após a execução do laboratório, o aluno será capaz de:
 ## 🛠️ Execução do Laboratório
 
 ### 1) Conexão ao EC2 Command Host
-![Conexão EC2](images/foto1.jpeg)
 
 **Acesso via Session Manager:**
 - Instância: Command Host
